@@ -1,0 +1,29 @@
+.notification-box {
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-box > div {
+    padding: 10px;
+    width: 50%;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.notification  {
+    border: solid 2px gray;
+    background-color: gainsboro;
+}
+
+.success  {
+    border: solid 2px green;
+    background-color: lightgreen;
+}
+
+.error {
+    border: solid 2px red;
+    background-color: lightcoral;
+}
