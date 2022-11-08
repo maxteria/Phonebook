@@ -2,12 +2,11 @@ import React from "react";
 
 const Person = ({ name, number, id, handleDelete }) => (
   <li>
-    {name} {number} <button onClick={() => handleDelete(id)}>Delete</button>
+    <span>{name} </span><span>{number} </span><button onClick={() => handleDelete(id)}>delete</button>
   </li>
 );
 
 const Persons = ({ persons, handleDelete }) => {
-
   return (
     <>
       <ul>

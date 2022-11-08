@@ -39,12 +39,9 @@ const App = () => {
       persons.filter((person) => {
         let _name = person.name.toLowerCase();
         let _filter = newNameFilter.toLowerCase();
-        let _result = _name.includes(_filter);
-        console.log(`name: ${_name} | filter: ${_filter} | result: ${_result}`)
         return _name.includes(_filter);
       })
     );
-    console.log('--------------------------------------------------------------S')
   }, [persons, newNameFilter]);
 
   // HANDLERS: for controlled components
@@ -148,24 +145,31 @@ const App = () => {
 
   // Render
   return (
-    <div>
+    <>
       <Notification text={notification.text} type={notification.type} />
 
-      <h1>Phonebook</h1>
-      <Filter onChange={handleNameFilterChange} text="Filter Shown With" />
+      <h1>Phonebook APP</h1>
 
-      <h2>Add a new</h2>
-      <PersonForm
-        onSubmit={addPerson}
-        inputNameOnChange={handleNameChange}
-        inputNameValue={newName}
-        inputPhoneOnChange={handleNumberChange}
-        inputPhoneValue={newPhone}
-      />
-
-      <h2>Numbers</h2>
-      <Persons persons={personsFilteredByName} handleDelete={removePerson} />
-    </div>
+      <section>
+        <h2>Add new</h2>
+        <PersonForm
+          onSubmit={addPerson}
+          inputNameOnChange={handleNameChange}
+          inputNameValue={newName}
+          inputPhoneOnChange={handleNumberChange}
+          inputPhoneValue={newPhone}
+        />
+      </section>
+      <section>
+        <h2>Contact list</h2>
+        <Filter onChange={handleNameFilterChange} />
+        {
+          personsFilteredByName.length > 0 ?
+            <Persons persons={personsFilteredByName} handleDelete={removePerson} />
+            : <p>Nothin for <strong>{newNameFilter}</strong></p>
+        }
+      </section>
+    </>
   );
 };
 

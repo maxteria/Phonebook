@@ -5,23 +5,23 @@ const PersonForm = (props) => {
     <>
       <form onSubmit={props.onSubmit}>
         <label>
-          name:
           <input
             onChange={props.inputNameOnChange}
             value={props.inputNameValue}
+            placeholder="name"
           />
         </label>
         <br />
         <label>
-          number:
           <input
             onChange={props.inputPhoneOnChange}
             value={props.inputPhoneValue}
+            placeholder="phone"
           />
         </label>
 
         <div>
-          <button type="submit">add</button>
+          <button type="submit" >add</button>
         </div>
       </form>
     </>

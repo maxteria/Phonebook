@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001/persons";
+const baseUrl = window.location.hostname === "localhost" ?
+  "http://localhost:3001/api/persons" :
+  "https://phonebook-backend.up.railway.app/api/persons"
 
 const getAll = () => {
   const request = axios.get(baseUrl);
