@@ -65,48 +65,48 @@ const App = () => {
     const personExists = persons.find((element) => element.name === newName);
 
     // Exists
-    if (
-      personExists &&
-      window.confirm(
-        `${personExists.name} is already added to phonebook, replace the old number with a new one?`
-      )
-    ) {
-      personServices
-        .update({ ...personExists, number: newPhone })
-        .then((returnedPerson) => {
-          setPersons(
-            persons.map((person) =>
-              person.id !== personExists.id ? person : returnedPerson
-            )
-          );
-          setNewName("");
-          setNewPhone("");
-          setNotification({
-            text: "The number has been updated",
-            type: "notification",
-          });
-          clearNotification();
-        });
-    }
+    // if (
+    //   personExists &&
+    //   window.confirm(
+    //     `${personExists.name} is already added to phonebook, replace the old number with a new one?`
+    //   )
+    // ) {
+    //   personServices
+    //     .update({ ...personExists, number: newPhone })
+    //     .then((returnedPerson) => {
+    //       setPersons(
+    //         persons.map((person) =>
+    //           person.id !== personExists.id ? person : returnedPerson
+    //         )
+    //       );
+    //       setNewName("");
+    //       setNewPhone("");
+    //       setNotification({
+    //         text: "The number has been updated",
+    //         type: "notification",
+    //       });
+    //       clearNotification();
+    //     });
+    // // }
 
     // Not exists
-    if (!personExists) {
-      const newPerson = {
-        name: newName,
-        number: newPhone,
-      };
-      personServices.create(newPerson).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setNewName("");
-        setNewPhone("");
-        setNotification({
-          text: "The person has been added",
-          type: "notification",
-        });
-        clearNotification();
+    // if (!personExists) {
+    const newPerson = {
+      name: newName,
+      number: newPhone,
+    };
+    personServices.create(newPerson).then((returnedPerson) => {
+      setPersons(persons.concat(returnedPerson));
+      setNewName("");
+      setNewPhone("");
+      setNotification({
+        text: "The person has been added",
+        type: "notification",
       });
-    }
-  };
+      clearNotification();
+    });
+  }
+  // };
 
   // REMOVE: Person from phonebook
   const removePerson = (personId) => {
