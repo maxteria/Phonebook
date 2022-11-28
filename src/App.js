@@ -61,41 +61,13 @@ const App = () => {
   const addPerson = (e) => {
     e.preventDefault();
 
-    // Check if the person exist in the phone book.
-    const personExists = persons.find((element) => element.name === newName);
+    const newPerson = {
+      name: newName,
+      number: newPhone,
+    };
 
-    // Exists
-    if (
-      personExists &&
-      window.confirm(
-        `${personExists.name} is already added to phonebook, replace the old number with a new one?`
-      )
-    ) {
-      personServices
-        .update({ ...personExists, number: newPhone })
-        .then((returnedPerson) => {
-          setPersons(
-            persons.map((person) =>
-              person.id !== personExists.id ? person : returnedPerson
-            )
-          );
-          setNewName("");
-          setNewPhone("");
-          setNotification({
-            text: "The number has been updated",
-            type: "notification",
-          });
-          clearNotification();
-        });
-    }
-
-    // Not exists
-    if (!personExists) {
-      const newPerson = {
-        name: newName,
-        number: newPhone,
-      };
-      personServices.create(newPerson).then((returnedPerson) => {
+    personServices
+      .create(newPerson).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
         setNewName("");
         setNewPhone("");
@@ -104,8 +76,13 @@ const App = () => {
           type: "notification",
         });
         clearNotification();
+      }).catch((error) => {
+        setNotification({
+          text: error.response.data.error,
+          type: "error",
+        });
+        clearNotification();
       });
-    }
   };
 
   // REMOVE: Person from phonebook
